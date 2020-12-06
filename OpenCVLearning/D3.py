@@ -22,6 +22,7 @@ img = cv2.imread(path)
 """
 
 # 改變不同的 color space
+# HSL: 色相，飽和度，亮度
 hls = cv2.cvtColor(img, cv2.COLOR_BGR2HLS)
 
 change_percentage = 0.2

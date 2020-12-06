@@ -10,6 +10,7 @@ path = "image/lena.png"
 img = cv2.imread(path)
 
 # 改變不同的 color space
+# HSL: 色相，飽和度，亮度
 hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
 
 showImages(bgr=img, hsv=hsv)
