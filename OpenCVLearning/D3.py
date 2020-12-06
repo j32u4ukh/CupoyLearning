@@ -23,7 +23,6 @@ img = cv2.imread(path)
 
 # 改變不同的 color space
 hls = cv2.cvtColor(img, cv2.COLOR_BGR2HLS)
-saturation = hls.astype('float32')[..., -1]
 
 change_percentage = 0.2
 
