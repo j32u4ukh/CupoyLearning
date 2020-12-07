@@ -3,7 +3,9 @@ import numpy as np
 
 from utils.opencv import showImages
 
-"""Working directory: CupoyLearning"""
+"""Working directory: CupoyLearning
+仿射變換：保證「共線不變性」與「比例不變性」
+"""
 
 path = "image/lena.png"
 img = cv2.imread(path)
