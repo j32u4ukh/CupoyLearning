@@ -1,5 +1,4 @@
 import cv2
-import numpy as np
 
 from utils.opencv import showImages
 
@@ -32,6 +31,9 @@ sift = cv2.xfeatures2d.SIFT_create()
 
 # 取得 SIFT 關鍵點位置
 keypoints = sift.detect(gray, None)
+# type(keypoints): list
+# #keypoints = 1098
+# type(keypoints[0]): cv2.KeyPoint
 
 # 畫圖 + 顯示圖片
 img_show = cv2.drawKeypoints(gray, keypoints, img)
