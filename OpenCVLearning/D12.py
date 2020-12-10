@@ -1,7 +1,7 @@
 import math
 
-from keras.layers import Convolution2D, Input, Dense
-from keras.models import Model, Sequential
+from keras.layers import Convolution2D, Input
+from keras.models import Model
 
 """Working directory: CupoyLearning
 
