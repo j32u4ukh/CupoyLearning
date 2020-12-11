@@ -1,10 +1,5 @@
-from keras.models import Sequential  # 用來啟動 NN
-from keras.layers import Conv2D  # Convolution Operation
-from keras.layers import MaxPooling2D  # Pooling
-from keras.layers import Flatten
-from keras.layers import Dense  # Fully Connected Networks
-from keras.layers import BatchNormalization
-from keras.layers import Activation
+from keras.layers import Activation, BatchNormalization, Conv2D
+from keras.models import Sequential
 
 """Working directory: CupoyLearning
 
