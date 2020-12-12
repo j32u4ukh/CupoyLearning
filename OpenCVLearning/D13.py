@@ -54,7 +54,7 @@ model.add(Conv2D(10, kernel_size=(3, 3), padding='same'))
 # (4, 4, 10)
 
 # Flatten完尺寸如何變化？
-# model.add(Flatten())
+model.add(Flatten())
 # (160,)
 
 """
