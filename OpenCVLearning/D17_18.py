@@ -14,6 +14,7 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 def VGG16(include_top=True, input_shape=(224, 224, 1), pooling='max', classes=1000):
     input_data = Input(shape=input_shape)
 
+    # Block 1
     x = Conv2D(64, (3, 3), activation='relu', padding='same', name='block1_conv1')(input_data)
     x = Conv2D(64, (3, 3), activation='relu', padding='same', name='block1_conv2')(x)
     x = MaxPooling2D((2, 2), strides=(2, 2), name='block1_pool')(x)
