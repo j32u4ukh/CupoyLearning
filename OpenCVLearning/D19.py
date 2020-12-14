@@ -1,20 +1,18 @@
 import warnings
 
-import numpy as np
-from keras.models import Model
-from keras.layers import Flatten
-from keras.layers import Dense
-from keras.layers import Input
-from keras.layers import Conv2D
-from keras.layers import MaxPooling2D
-from keras.layers import GlobalMaxPooling2D
-from keras.layers import GlobalAveragePooling2D
 from keras import backend as K
 from keras import layers
-from keras.layers import BatchNormalization
-from keras.layers import Activation
-
-from keras.layers import Conv2D, Dense, Flatten, GlobalAveragePooling2D, GlobalMaxPooling2D, Input, MaxPooling2D
+from keras.layers import (
+    Activation,
+    BatchNormalization,
+    Conv2D,
+    Dense,
+    Flatten,
+    GlobalAveragePooling2D,
+    GlobalMaxPooling2D,
+    Input,
+    MaxPooling2D
+)
 from keras.models import Model
 
 warnings.simplefilter(action='ignore', category=FutureWarning)
