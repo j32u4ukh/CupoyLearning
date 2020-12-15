@@ -1,46 +1,30 @@
 import numpy as np
 import math
-from keras.layers import Convolution2D
+
+from keras import Model
+from keras.layers import Convolution2D, Reshape, Dense, Dropout
 from keras.layers import Input
-from utils.dl import computeFeatureSize
+from utils.dl import VGG16
 
 
-def computePaddingSize(in_size, out_size):
-    return math.ceil((out_size - in_size + 1) / 2)
+n_class = 10
+input_shape = (224, 224, 3)
+input_tensor = Input(input_shape)
 
+vgg16 = VGG16(include_top=False, input_shape=input_shape, pooling='max')
+middle_model = Model(inputs=vgg16.layers[0].input, outputs=vgg16.layers[10].output)
+x = middle_model(input_tensor)
+conv_shape = x.get_shape()
+# print(conv_shape)
 
-def scalePadding(x, output_shape):
-    n_dim = len(x.shape)
+# 從(Batch_size,輸出高度,輸出寬度,輸出深度)變成(Batch_size,輸出寬度,輸出深度*輸出高度)，以符合ctc loss需求
+x = Reshape(target_shape=(int(conv_shape[2]), int(conv_shape[1] * conv_shape[3])))(x)
 
-    if n_dim == 3:
-        h_in, w_in = x.shape[0:2]
+x = Dense(128, activation='relu')(x)
 
-    elif n_dim == 4:
-        h_in, w_in = x.shape[1:3]
+x = Dropout(0.25)(x)
+x = Dense(n_class, activation='softmax')(x)
 
-    else:
-        print("n_dim:", n_dim)
-        h_in, w_in = x.shape
-
-    h_out, w_out = output_shape
-
-    h_padding = computePaddingSize(in_size=h_in, out_size=h_out)
-    w_padding = computePaddingSize(in_size=w_in, out_size=w_out)
-
-    if n_dim == 3:
-        padding_config = ((w_padding, w_padding), (h_padding, h_padding), (0, 0))
-
-    elif n_dim == 4:
-        padding_config = ((0, 0), (w_padding, w_padding), (h_padding, h_padding), (0, 0))
-
-    else:
-        padding_config = ((w_padding, w_padding), (h_padding, h_padding))
-
-    dst = np.pad(x, padding_config, "constant", constant_values=(0, 0))
-
-    return dst
-
-
-x = np.random.randint(low=0, high=255, size=(32, 32, 3))
-y = scalePadding(x, output_shape=(71, 71))
-print(y.shape)
+# 包裝用來預測的model
+base_model = Model(inputs=input_tensor, outputs=x)
+print(base_model.summary())

@@ -1,9 +1,5 @@
 import math
 
-from keras.layers import Convolution2D, Input
-from keras.models import Model
-from keras.layers import Conv2D, Dense, Flatten, GlobalAveragePooling2D, GlobalMaxPooling2D, Input, MaxPooling2D
-from keras.models import Model
 from keras import backend as K
 from keras import layers
 from keras.layers import (
@@ -58,31 +54,49 @@ def VGG16(include_top=True, input_shape=(224, 224, 1), pooling='max', classes=10
 
     # Block 1
     x = Conv2D(64, (3, 3), activation='relu', padding='same', name='block1_conv1')(input_data)
+    # (None, 224, 224, 64)
     x = Conv2D(64, (3, 3), activation='relu', padding='same', name='block1_conv2')(x)
+    # (None, 224, 224, 64)
     x = MaxPooling2D((2, 2), strides=(2, 2), name='block1_pool')(x)
+    # (None, 112, 112, 64)
 
     # Block 2
     x = Conv2D(128, (3, 3), activation='relu', padding='same', name='block2_conv1')(x)
+    # (None, 112, 112, 128)
     x = Conv2D(128, (3, 3), activation='relu', padding='same', name='block2_conv2')(x)
+    # (None, 112, 112, 128)
     x = MaxPooling2D((2, 2), strides=(2, 2), name='block2_pool')(x)
+    # (None, 56, 56, 128)
 
     # Block 3
     x = Conv2D(256, (3, 3), activation='relu', padding='same', name='block3_conv1')(x)
+    # (None, 56, 56, 256)
     x = Conv2D(256, (3, 3), activation='relu', padding='same', name='block3_conv2')(x)
+    # (None, 56, 56, 256)
     x = Conv2D(256, (3, 3), activation='relu', padding='same', name='block3_conv3')(x)
+    # (None, 56, 56, 256)
     x = MaxPooling2D((2, 2), strides=(2, 2), name='block3_pool')(x)
+    # (None, 28, 28, 256)
 
     # Block 4
     x = Conv2D(512, (3, 3), activation='relu', padding='same', name='block4_conv1')(x)
+    # (None, 28, 28, 512)
     x = Conv2D(512, (3, 3), activation='relu', padding='same', name='block4_conv2')(x)
+    # (None, 28, 28, 512)
     x = Conv2D(512, (3, 3), activation='relu', padding='same', name='block4_conv3')(x)
+    # (None, 28, 28, 512)
     x = MaxPooling2D((2, 2), strides=(2, 2), name='block4_pool')(x)
+    # (None, 14, 14, 512)
 
     # Block 5
     x = Conv2D(512, (3, 3), activation='relu', padding='same', name='block5_conv1')(x)
+    # (None, 14, 14, 512)
     x = Conv2D(512, (3, 3), activation='relu', padding='same', name='block5_conv2')(x)
+    # (None, 14, 14, 512)
     x = Conv2D(512, (3, 3), activation='relu', padding='same', name='block5_conv3')(x)
+    # (None, 14, 14, 512)
     x = MaxPooling2D((2, 2), strides=(2, 2), name='block5_pool')(x)
+    # (None, 7, 7, 512)
 
     if include_top:
         # Classification block
@@ -95,12 +109,12 @@ def VGG16(include_top=True, input_shape=(224, 224, 1), pooling='max', classes=10
             x = GlobalAveragePooling2D()(x)
         elif pooling == 'max':
             x = GlobalMaxPooling2D()(x)
+            # (None, 512)
 
     # Create model.
     model = Model(input_data, x, name='vgg16')
 
     return model
-
 
 
 def batchNormalizationConv2D(x, filters, kernel_size, padding='same', strides=(1, 1), normalizer=True,
@@ -279,7 +293,6 @@ def inceptionVGG16(include_top=True, input_shape=(224, 224, 1), pooling='max', c
     return model
 
 
-
 def residualBlockV1(input_data, kernel_size, filters, stage, block):
     filter1, filter2, filter3 = filters
     conv_name_base = f'res_{stage}_{block}_branch'
@@ -338,4 +351,10 @@ def residualZipBlockV2(input_data, kernel_size, stage, block, reduce=96, ouput_s
     x = layers.add([x, input_data])
     x = Activation('relu')(x)
     return x
+
+
+if __name__ == "__main__":
+    model = VGG16(include_top=False, input_shape=(224, 224, 1), pooling='max', classes=1000)
+    layer = model.layers[10]
+    print(layer.output)
 
