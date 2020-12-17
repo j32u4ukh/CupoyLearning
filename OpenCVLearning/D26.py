@@ -1,5 +1,4 @@
-from keras.layers import Flatten, Dense, Input, Conv2D, MaxPooling2D, Dropout
-from keras.layers import GlobalAveragePooling2D, GlobalMaxPooling2D, TimeDistributed
+from keras.layers import Input, Conv2D, MaxPooling2D
 
 """Working directory: CupoyLearning"""
 
