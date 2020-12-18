@@ -62,6 +62,8 @@ def nms(bounding_boxes, confidence_score, threshold):
 
         '''重疊率小於預測 threshold 的 Boxes 要保存下來'''
         left = np.where(ratio < threshold)
+
+        # left 的計算過程本來就不包含最後一個，最後一個每次一定都會被移除
         order = order[left]
         print(order)
 
