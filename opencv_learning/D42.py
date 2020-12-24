@@ -1,16 +1,10 @@
+import cv2
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-import cv2
 
 from utils.opencv import showImages
 
-"""Working directory: CupoyLearning
-
-翻轉：實作上下翻轉
-縮放：實作鄰近差值
-平移：建立 Translation Transformation Matrix 來做平移
-"""
+"""Working directory: CupoyLearning"""
 
 # 讀取 csv 文件
 df = pd.read_csv("data/facial-keypoints-detection/training.csv")
