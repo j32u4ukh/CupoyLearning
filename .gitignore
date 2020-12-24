@@ -1,6 +1,6 @@
 # Add by nyself
 debug.log
-# data/SSD/
+data/facial-keypoints-detection/
 data/SSD/annotations/
 data/SSD/ObjectDetection/demo/ssd300_mAP_77.43_v2.pth
 
