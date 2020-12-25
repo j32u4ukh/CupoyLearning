@@ -1,10 +1,10 @@
+import imgaug.augmenters.flip as aug
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-from keras.models import Sequential
-from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
 from keras.callbacks import ModelCheckpoint, History
-import imgaug.augmenters.flip as aug
+from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
+from keras.models import Sequential
 
 """Working directory: CupoyLearning"""
 
@@ -67,6 +67,23 @@ def buildModel():
     # 最後輸出 30 維的向量，也就是 15 個關鍵點的值
     model.add(Dense(30))
     return model
+
+
+# 在灰階圖像上畫關鍵點的函數
+def plotKeypoints(img, points):
+    plt.imshow(img, cmap='gray')
+    for i in range(0, 30, 2):
+        plt.scatter((points[i] + 0.5) * 96, (points[i + 1] + 0.5) * 96, color='red')
+
+
+def flip(img, point):
+    img = aug.fliplr(img)
+    length = len(point)
+
+    idxs = np.arange(0, length, 2)
+    point[idxs] = -point[idxs]
+
+    return img, point
 
 
 imgs_train, points_train = loadData(file_name="training")
@@ -142,14 +159,6 @@ plt.legend(loc='upper right')
 # 讀取測試資料集
 imgs_test, _ = loadData(file_name='test')
 
-
-# 在灰階圖像上畫關鍵點的函數
-def plot_keypoints(img, points):
-    plt.imshow(img, cmap='gray')
-    for i in range(0, 30, 2):
-        plt.scatter((points[i] + 0.5) * 96, (points[i + 1] + 0.5) * 96, color='red')
-
-
 fig = plt.figure(figsize=(15,15))
 
 # 在測試集圖片上用剛剛訓練好的模型做關鍵點的預測
@@ -157,7 +166,7 @@ points_test = model.predict(imgs_test.reshape(imgs_test.shape[0], 96, 96, 1))
 
 for i in range(16):
     ax = fig.add_subplot(4, 4, i + 1, xticks=[], yticks=[])
-    plot_keypoints(imgs_test[i], np.squeeze(points_test[i]))
+    plotKeypoints(imgs_test[i], np.squeeze(points_test[i]))
 
 
 """
@@ -167,17 +176,6 @@ for i in range(16):
 
 Note: 圖像 flip 之後，groundtruth 的關鍵點也要跟著 flip 哦
 """
-
-
-def flip(img, point):
-    img = aug.fliplr(img)
-    length = len(point)
-
-    idxs = np.arange(0, length, 2)
-    point[idxs] = -point[idxs]
-
-    return img, point
-
 
 # train
 flip_imgs_train = imgs_train.copy()
@@ -224,4 +222,4 @@ flip_points_test_hat = model.predict(flip_imgs_test.reshape(flip_imgs_test.shape
 
 for i in range(16):
     ax = fig.add_subplot(4, 4, i + 1, xticks=[], yticks=[])
-    plot_keypoints(imgs_test[i], np.squeeze(flip_points_test_hat[i]))
+    plotKeypoints(imgs_test[i], np.squeeze(flip_points_test_hat[i]))
