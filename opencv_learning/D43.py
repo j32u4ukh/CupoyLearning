@@ -1,10 +1,9 @@
 import numpy as np
 import pandas as pd
 from keras import Model
-from keras.models import Sequential
-from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
+from keras.layers import Dense
+
 from utils.dl import VGG16
-from utils.opencv import showImages
 
 """Working directory: CupoyLearning
 
