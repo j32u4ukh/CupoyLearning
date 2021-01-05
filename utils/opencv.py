@@ -103,3 +103,16 @@ def scalePadding(x, output_shape):
     dst = np.pad(x, padding_config, "constant", constant_values=(0, 0))
 
     return dst
+
+
+def siftDetect(img):
+    sift = cv2.xfeatures2d.SIFT_create()
+    keypoints = sift.detect(img, None)
+    return keypoints
+
+
+def siftDetectAndCompute(img):
+    sift = cv2.xfeatures2d_SIFT.create()
+    keypoints, features = sift.detectAndCompute(img, None)
+    return keypoints, features
+

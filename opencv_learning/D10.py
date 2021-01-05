@@ -8,8 +8,8 @@ from utils.opencv import showImages
 """
 
 # 以灰階方式讀入圖片
-query = cv2.imread('image/box.png', cv2.IMREAD_GRAYSCALE)
-target = cv2.imread('image/box_in_scene.png', cv2.IMREAD_GRAYSCALE)
+query = cv2.imread('data/image/box.png', cv2.IMREAD_GRAYSCALE)
+target = cv2.imread('data/image/box_in_scene.png', cv2.IMREAD_GRAYSCALE)
 
 
 # 建立 SIFT 物件

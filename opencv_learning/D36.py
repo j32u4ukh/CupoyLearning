@@ -1,12 +1,8 @@
 import cv2
-import matplotlib.patches as patches
 import numpy as np
-import matplotlib.pyplot as plt
-
-from keras import backend as K
+from keras.layers.convolutional import Conv2D
 from keras.models import Sequential
-from keras.layers.core import Activation
-from keras.layers.convolutional import Conv2D, MaxPooling2D
+
 from utils.opencv import showImages
 
 """Working directory: CupoyLearning

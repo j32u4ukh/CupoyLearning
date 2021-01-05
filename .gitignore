@@ -3,6 +3,8 @@ debug.log
 data/facial-keypoints-detection/
 data/SSD/annotations/
 data/SSD/ObjectDetection/demo/ssd300_mAP_77.43_v2.pth
+data/*.pickle
+data/*.h5
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

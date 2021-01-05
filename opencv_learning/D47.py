@@ -1,7 +1,6 @@
-from keras.layers import DepthwiseConv2D, Conv2D, BatchNormalization, Activation
+from keras.layers import Activation
+from keras.layers import DepthwiseConv2D, Conv2D, BatchNormalization, Add
 from keras.models import Input, Model
-from keras.models import Input, Model
-from keras.layers import DepthwiseConv2D, Conv2D, BatchNormalization, ReLU, Add
 
 """Working directory: CupoyLearning
 

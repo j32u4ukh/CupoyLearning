@@ -10,7 +10,7 @@ from utils.opencv import showImages
 * 需要額外安裝 OpenCV 相關套件
 """
 
-path = "image/lena.png"
+path = "data/image/nms.jpg"
 img = cv2.imread(path)
 
 # 轉為灰階圖片
@@ -30,12 +30,15 @@ pip install --user opencv-contrib-python==3.4.2.16
 sift = cv2.xfeatures2d.SIFT_create()
 
 # 取得 SIFT 關鍵點位置
-keypoints = sift.detect(gray, None)
+# keypoints = sift.detect(gray, None)
+keypoints, features = sift.detectAndCompute(gray, None)
 # type(keypoints): list
 # #keypoints = 1098
 # type(keypoints[0]): cv2.KeyPoint
 
+kp0 = keypoints[0]
+
 # 畫圖 + 顯示圖片
-img_show = cv2.drawKeypoints(gray, keypoints, img)
+img_show = cv2.drawKeypoints(gray, keypoints, img.copy())
 
 showImages(gray=gray, img_show=img_show)

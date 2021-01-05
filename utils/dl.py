@@ -1,18 +1,19 @@
 import math
-
+import os
+import numpy as np
+from keras.datasets.cifar import load_batch
 from keras import backend as K
 from keras import layers
+from keras.layers import Activation
 from keras.layers import (
-    Activation,
-    BatchNormalization,
-    Conv2D,
     Dense,
     Flatten,
     GlobalAveragePooling2D,
     GlobalMaxPooling2D,
-    Input,
     MaxPooling2D
 )
+from keras.layers import DepthwiseConv2D, Conv2D, BatchNormalization, Add
+from keras.models import Input
 from keras.models import Model
 
 
@@ -353,8 +354,125 @@ def residualZipBlockV2(input_data, kernel_size, stage, block, reduce=96, ouput_s
     return x
 
 
-if __name__ == "__main__":
-    model = VGG16(include_top=False, input_shape=(224, 224, 1), pooling='max', classes=1000)
-    layer = model.layers[10]
-    print(layer.output)
+def layerInvertedResidual(input_tensor, expansion):
+    """
+    嘗試用 keras 的 DepthwiseConv2D 等 layers 實做 Inverted Residual Block.
 
+    :param input_tensor:
+    :param expansion: expand filters size
+    :return:
+    """
+
+    x = DepthwiseConv2D(3, padding="same", depth_multiplier=expansion, input_shape=input_tensor.shape)(input_tensor)
+    x = BatchNormalization(axis=2)(x)
+    x = Activation('relu')(x)
+    x = Conv2D(3, kernel_size=1, padding="same")(x)
+    x = BatchNormalization(axis=2)(x)
+    x = Activation('relu')(x)
+    added = Add()([input_tensor, x])
+
+    '''
+    Model: "model_2"
+    __________________________________________________________________________________________________
+    Layer (type)                    Output Shape         Param #     Connected to                     
+    ==================================================================================================
+    input_7 (InputLayer)            (None, 64, 64, 3)    0                                            
+    __________________________________________________________________________________________________
+    depthwise_conv2d_5 (DepthwiseCo (None, 64, 64, 18)   180         input_7[0][0]                    
+    __________________________________________________________________________________________________
+    batch_normalization_5 (BatchNor (None, 64, 64, 18)   256         depthwise_conv2d_5[0][0]         
+    __________________________________________________________________________________________________
+    activation_3 (Activation)       (None, 64, 64, 18)   0           batch_normalization_5[0][0]      
+    __________________________________________________________________________________________________
+    conv2d_10 (Conv2D)              (None, 64, 64, 3)    57          activation_3[0][0]               
+    __________________________________________________________________________________________________
+    batch_normalization_6 (BatchNor (None, 64, 64, 3)    256         conv2d_10[0][0]                  
+    __________________________________________________________________________________________________
+    activation_4 (Activation)       (None, 64, 64, 3)    0           batch_normalization_6[0][0]      
+    __________________________________________________________________________________________________
+    add_1 (Add)                     (None, 64, 64, 3)    0           input_7[0][0]                    
+                                                                     activation_4[0][0]               
+    ==================================================================================================
+    Total params: 749
+    Trainable params: 493
+    Non-trainable params: 256
+    __________________________________________________________________________________________________
+    None
+    '''
+
+    return added
+
+
+def layerSeparableConv(input_tensor):
+    """
+    嘗試用 keras 的 DepthwiseConv2D 等 layers 實做 Separable Convolution.
+
+    :param input_tensor:
+    :return:
+    """
+    x = DepthwiseConv2D(3, padding="same", input_shape=input_tensor.shape)(input_tensor)
+    x = BatchNormalization(axis=2)(x)
+    x = Activation('relu')(x)
+    x = Conv2D(128, kernel_size=1, padding="same")(x)
+    x = BatchNormalization(axis=2)(x)
+    x = Activation('relu')(x)
+
+    '''Model: "model_1"
+    _________________________________________________________________
+    Layer (type)                 Output Shape              Param #   
+    =================================================================
+    input_6 (InputLayer)         (None, 64, 64, 3)         0         
+    _________________________________________________________________
+    depthwise_conv2d_4 (Depthwis (None, 64, 64, 3)         30        
+    _________________________________________________________________
+    batch_normalization_3 (Batch (None, 64, 64, 3)         256       
+    _________________________________________________________________
+    activation_1 (Activation)    (None, 64, 64, 3)         0         
+    _________________________________________________________________
+    conv2d_9 (Conv2D)            (None, 64, 64, 128)       512       
+    _________________________________________________________________
+    batch_normalization_4 (Batch (None, 64, 64, 128)       256       
+    _________________________________________________________________
+    activation_2 (Activation)    (None, 64, 64, 128)       0         
+    =================================================================
+    Total params: 1,054
+    Trainable params: 798
+    Non-trainable params: 256
+    _________________________________________________________________
+    None
+    '''
+
+    return x
+
+
+def loadCifar10():
+    path = r"C:\Users\user\.keras\datasets\cifar-10-batches-py"
+
+    num_train_samples = 50000
+
+    x_train = np.empty((num_train_samples, 3, 32, 32), dtype='uint8')
+    y_train = np.empty((num_train_samples,), dtype='uint8')
+
+    for i in range(1, 6):
+        fpath = os.path.join(path, 'data_batch_' + str(i))
+        (x_train[(i - 1) * 10000: i * 10000, :, :, :],
+         y_train[(i - 1) * 10000: i * 10000]) = load_batch(fpath)
+
+    fpath = os.path.join(path, 'test_batch')
+    x_test, y_test = load_batch(fpath)
+
+    y_train = np.reshape(y_train, (len(y_train), 1))
+    y_test = np.reshape(y_test, (len(y_test), 1))
+
+    if K.image_data_format() == 'channels_last':
+        x_train = x_train.transpose([0, 2, 3, 1])
+        x_test = x_test.transpose([0, 2, 3, 1])
+
+    return (x_train, y_train), (x_test, y_test)
+
+
+if __name__ == "__main__":
+    # model = VGG16(include_top=False, input_shape=(224, 224, 1), pooling='max', classes=1000)
+    # layer = model.layers[10]
+    # print(layer.output)
+    (x_train, y_train), (x_test, y_test) = loadCifar10()
