@@ -10,13 +10,10 @@ from keras.models import Model
 填充 (Padding)
 
 『SAME』
-
  out_height = ceil(float(in_height) / float(strides[1])) 
 out_width = ceil(float(in_width) / float(strides[2]))
 
-
 『Valid』
-
 out_height = ceil(float(in_height - filter_height + 1) / float(strides[1]))  
 out_width = ceil(float(in_width - filter_width + 1) / float(strides[2]))
 

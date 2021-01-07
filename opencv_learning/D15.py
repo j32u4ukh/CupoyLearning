@@ -125,7 +125,7 @@ plt.xlabel('Epoch')
 plt.legend(['Train', 'Test'], loc='upper left')
 plt.show()
 
-"""模型架構與超參數的調整在驗證集(Validation)獲得良好表現後，才利用測試集衡量表現"""
+""" 模型架構與超參數的調整在驗證集(Validation)獲得良好表現後，才利用測試集衡量表現 """
 # y_hat = model.predict(x_test_norm)
 scores = model.evaluate(x_test_norm, y_test_onehot, verbose=1)
 print('Test loss:', scores[0])

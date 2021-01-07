@@ -16,7 +16,7 @@ def rectToCrood(rect):
     return [rect[0], rect[1], rect[0] + rect[2], rect[1] + rect[3]]
 
 
-"""定義 IOU 計算"""
+""" 定義 IOU 計算 """
 
 
 def computeIOU(box1, box2):

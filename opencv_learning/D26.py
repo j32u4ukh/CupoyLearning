@@ -5,7 +5,7 @@ from keras.layers import Input, Conv2D, MaxPooling2D
 input_shape_img = (1024, 1024, 3)
 img_input = Input(shape=input_shape_img)
 
-'''先過一般CNN層提取特徵'''
+'''先過一般 CNN 層提取特徵'''
 
 
 def getFeaturesCNN(img_input):

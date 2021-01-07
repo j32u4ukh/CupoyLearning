@@ -5,7 +5,6 @@ from keras.models import Input, Model
 
 嘗試用 keras 的 DepthwiseConv2D 等 layers 實做 Separable Convolution.
 
-
 depthwise's filter shape 爲 (3,3), padding = same
 pointwise's filters size 爲 128
 不需要給 alpha, depth multiplier 參數

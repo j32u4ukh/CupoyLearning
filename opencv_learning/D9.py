@@ -40,5 +40,4 @@ kp0 = keypoints[0]
 
 # 畫圖 + 顯示圖片
 img_show = cv2.drawKeypoints(gray, keypoints, img.copy())
-
 showImages(gray=gray, img_show=img_show)

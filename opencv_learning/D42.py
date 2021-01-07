@@ -56,5 +56,3 @@ for i in range(n_coord):
 
 sample_img = cv2.resize(sample_img, (400, 400), interpolation=cv2.INTER_CUBIC)
 showImages(sample_img=sample_img)
-# plt.scatter(x_points, y_points)
-# plt.imshow(sample_img, cmap='gray')

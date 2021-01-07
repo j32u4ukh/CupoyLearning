@@ -11,7 +11,7 @@ point1 = np.array([[60, 40], [420, 40], [420, 510], [60, 510]], dtype=np.float32
 point2 = np.array([[0, 80], [w, 120], [w, 430], [0, 470]], dtype=np.float32)
 """
 
-path = "image/lena.png"
+path = "data/image/lena.png"
 img = cv2.imread(path)
 
 """

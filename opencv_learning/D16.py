@@ -9,8 +9,6 @@ from keras.preprocessing.image import ImageDataGenerator
 
 from utils.opencv import showImages
 
-# warnings.simplefilter(action='ignore', category=FutureWarning)
-
 """Working directory: CupoyLearning
 
 『本次練習內容』

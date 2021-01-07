@@ -9,6 +9,7 @@ from captcha.image import ImageCaptcha
 from keras import backend as K
 from keras.layers import Input, Reshape, Dropout, Dense, Lambda, GRU, Convolution2D, MaxPooling2D, BatchNormalization
 from keras.models import Model
+
 from utils.dl import VGG16
 
 """Working directory: CupoyLearning

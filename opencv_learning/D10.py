@@ -11,7 +11,6 @@ from utils.opencv import showImages
 query = cv2.imread('data/image/box.png', cv2.IMREAD_GRAYSCALE)
 target = cv2.imread('data/image/box_in_scene.png', cv2.IMREAD_GRAYSCALE)
 
-
 # 建立 SIFT 物件
 sift = cv2.xfeatures2d_SIFT.create()
 

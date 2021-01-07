@@ -7,8 +7,7 @@ from keras.models import Input, Model
 嘗試用 keras 的 DepthwiseConv2D 等 layers 實做 Inverted Residual Block.
 
 depthwise's filter shape 爲 (3,3), padding = same
-不需要給 alpha, depth multiplier 參數
-expansion 因子爲 6
+不需要給 alpha, depth multiplier 參數，expansion 因子爲 6
 """
 
 

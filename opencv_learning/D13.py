@@ -5,7 +5,7 @@ from keras.models import Sequential
 
 """Working directory: CupoyLearning
 
-『目標』: 了解Maxpooling的原理與CNN、FC層連結的方式
+『目標』: 了解 Maxpooling 的原理與 CNN、FC 層連結的方式
 """
 
 

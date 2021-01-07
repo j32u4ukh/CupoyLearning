@@ -113,5 +113,4 @@ output3 = model3.predict(batch_img)
 
 img1 = np.squeeze(output1, axis=0)
 img3 = np.squeeze(output3, axis=0)
-
 showImages(img=img, img1=img1, img3=img3)

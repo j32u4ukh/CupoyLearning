@@ -7,7 +7,7 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 
 """Working directory: CupoyLearning
 
-『本次練習內容』: 學習如何搭建Vgg16模型
+『本次練習內容』: 學習如何搭建 Vgg16 模型
 """
 
 

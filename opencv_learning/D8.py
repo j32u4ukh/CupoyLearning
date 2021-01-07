@@ -7,7 +7,7 @@ from utils.opencv import showImages
 實作邊緣檢測 (Sobel Filter)
 """
 
-path = "image/lena.png"
+path = "data/image/lena.png"
 img = cv2.imread(path)
 
 # 轉為灰階圖片

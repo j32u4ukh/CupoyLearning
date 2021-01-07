@@ -1,4 +1,3 @@
-from keras.layers import Input
 import warnings
 
 import keras
@@ -366,7 +365,6 @@ print(f"x_train_norm.shape: {x_train_norm.shape}, y_train_onehot.shape: {y_train
 print(f"x_validation_norm.shape: {x_validation_norm.shape}, y_validation_onehot.shape: {y_validation_onehot.shape}")
 print(f"x_test_norm.shape: {x_test_norm.shape}, y_test_onehot.shape: {y_test_onehot.shape}")
 
-
 n_class = 10
 model = getXceptionModel(input_shape=x_train_norm.shape[1:], n_class=n_class)
 x = model.output
@@ -383,7 +381,6 @@ for layer in model.layers[:100]:
     layer.trainable = False
 for layer in model.layers[100:]:
     layer.trainable = True
-
 
 # 超過兩個就要選 categorical_crossentrophy
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])

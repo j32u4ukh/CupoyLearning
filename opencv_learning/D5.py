@@ -14,7 +14,7 @@ Hint: 人物原始邊框座標 (60, 40), (420, 510)
 * 畫出人物矩形邊框
 """
 
-path = "image/lena.png"
+path = "data/image/lena.png"
 img = cv2.imread(path)
 left_top = [60, 40]
 right_bottom = [420, 510]

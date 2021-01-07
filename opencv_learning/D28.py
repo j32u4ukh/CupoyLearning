@@ -46,7 +46,7 @@ def nms(bounding_boxes, confidence_score, threshold):
         picked_score.append(confidence_score[index])
 
         # Compute ordinates of intersection-over-union(IOU)
-        '''計算 Boxes 與最高分 BOX 之間的 IOU'''
+        ''' 計算 Boxes 與最高分 BOX 之間的 IOU '''
         x1 = np.maximum(start_x[index], start_x[order[:-1]])
         x2 = np.minimum(end_x[index], end_x[order[:-1]])
         y1 = np.maximum(start_y[index], start_y[order[:-1]])

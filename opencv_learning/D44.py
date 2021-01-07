@@ -170,9 +170,7 @@ for i in range(16):
 
 
 """
-作業
-
-請嘗試使用 flip (左右翻轉) 來做 augmentation 以降低人臉關鍵點檢測的 loss
+作業: 請嘗試使用 flip (左右翻轉) 來做 augmentation 以降低人臉關鍵點檢測的 loss
 
 Note: 圖像 flip 之後，groundtruth 的關鍵點也要跟著 flip 哦
 """

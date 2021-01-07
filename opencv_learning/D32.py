@@ -21,7 +21,7 @@ img = cv2.imread("data/image/yolo_dog.jpg")
 h, w, _ = img.shape
 show(img)
 
-"""假設我們知道這張中汽車、狗和腳踏車的 bboxes 訊息"""
+""" 假設我們知道這張中汽車、狗和腳踏車的 bboxes 訊息 """
 
 boxes = np.array([[128, 224, 314, 537],
                   [475, 85, 689, 170],

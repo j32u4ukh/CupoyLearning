@@ -3,7 +3,7 @@ from keras.models import Sequential
 
 """Working directory: CupoyLearning
 
-『目標』: 搭建 Conv2D-BN-Activation層
+『目標』: 搭建 Conv2D-BN-Activation 層
 """
 
 input_shape = (32, 32, 3)

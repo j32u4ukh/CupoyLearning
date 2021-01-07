@@ -40,7 +40,6 @@ ax.text(1800, 800, 'Region_Proposal', withdash=True, size=20)
 # Add the patch to the Axes
 ax.add_patch(rect_ground_truth)
 ax.add_patch(rect_region_proposal)
-
 plt.show()
 
 t_x = (g_x - p_x) / p_w

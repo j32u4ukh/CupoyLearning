@@ -12,7 +12,7 @@ from utils.opencv import showImages
 平移：建立 Translation Transformation Matrix 來做平移
 """
 
-path = "image/lena.png"
+path = "data/image/lena.png"
 img = cv2.imread(path)
 
 """

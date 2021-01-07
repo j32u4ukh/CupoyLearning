@@ -8,7 +8,7 @@ from keras.models import Model, Sequential
 * 都用一層，288 個神經元
 """
 # 建造一個一層的 FC 層
-# 輸入為 28*28*1 攤平 = 784
+# 輸入為 28 * 28 * 1 攤平 = 784
 inputs = Input(shape=(784,))
 
 # CNN 中用了(3*3*1)*32個神經元，我們這邊也用相同神經元數量

@@ -52,7 +52,6 @@ vgg16 = VGG16(include_top=False, input_shape=(96, 96, 1), pooling='avg')
 x = vgg16.output
 # x = Dense(100, activation="relu")(x)
 predictions = Dense(30)(x)
-
 model = Model(inputs=vgg16.input, outputs=predictions)
 
 # 配置 loss funtion 和 optimizer

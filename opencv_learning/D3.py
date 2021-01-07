@@ -11,7 +11,7 @@ from utils.opencv import showImages
 * alpha / beta 調整 對比 / 明亮
 """
 
-path = "image/lena.png"
+path = "data/image/lena.png"
 
 # 以彩色圖片的方式載入
 img = cv2.imread(path)

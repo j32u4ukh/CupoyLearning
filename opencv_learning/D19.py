@@ -21,7 +21,7 @@ warnings.simplefilter(action='ignore', category=FutureWarning)
 
 『本次練習內容』: 學習如何搭建Inception Block
 
-『本次練習目的』: 了解Inceotion原理 & 了解如何導入Inception block到原本架構中
+『本次練習目的』: 了解Inceotion原理 & 了解如何導入 Inception block 到原本架構中
 """
 
 

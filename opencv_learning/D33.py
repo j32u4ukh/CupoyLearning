@@ -7,8 +7,7 @@ import matplotlib.pyplot as plt
 NMS 在 YOLO 的實際運作以每一個類別為主，各別執行NMS。
 YOLO 在NMS中採用的信心度為「每個 bbox 包含各類別的信心度」
 
-作業
-在 NMS 流程中，IoU 重疊率參數(nms_threshold)調高，試著思考一下輸出的預測框會有甚麼變化?
+作業: 在 NMS 流程中，IoU 重疊率參數(nms_threshold)調高，試著思考一下輸出的預測框會有甚麼變化?
 Hint: 可以回頭看今天介紹的內容，思考輸出的預測框變多或變少?
 
 Ans: 門檻調高，可被保留的預測框數量則會增加

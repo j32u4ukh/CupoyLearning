@@ -7,7 +7,7 @@ from utils.opencv import showImages
 仿射變換：保證「共線不變性」與「比例不變性」
 """
 
-path = "image/lena.png"
+path = "data/image/lena.png"
 img = cv2.imread(path)
 
 """

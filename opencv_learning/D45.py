@@ -126,7 +126,6 @@ sunglass_w = int(abs(key_pts[9, 0] - key_pts[7, 0]))
 # y 和 h 也是類似的道理了
 sunglass_top_y = int((key_pts[9, 1] + key_pts[5, 1]) / 2)
 sunglass_h = int(abs(key_pts[8, 1] - key_pts[10, 1]) / 2)
-
 new_sunglasses = cv2.resize(sunglasses, (sunglass_w, sunglass_h), interpolation=cv2.INTER_CUBIC)
 
 # roi 為要覆蓋太陽眼鏡的 BGR 人臉範圍
